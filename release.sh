@@ -2212,7 +2212,7 @@ if [ -z "$skip_zipfile" ]; then
 
 		echo "Uploading $archive_name ($game_version $file_type) to $project_site/projects/$slug"
 		resultfile="$releasedir/cf_result.json"
-		result=$( echo "$_cf_payload" | curl -sS --retry 0 -m 20 --no-keepalive \
+		result=$( echo "$_cf_payload" | curl -sS --retry 3 --retry-delay 10 --trace-ascii - \
 				-w "%{http_code}" -o "$resultfile" \
 				-H "x-api-token: $cf_token" \
 				-F "metadata=<-" \
